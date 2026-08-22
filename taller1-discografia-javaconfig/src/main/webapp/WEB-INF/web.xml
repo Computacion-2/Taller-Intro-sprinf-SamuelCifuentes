@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+             http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+
+    <!-- Carga el contexto Spring desde clase @Configuration con @Bean explícitos -->
+    <context-param>
+        <param-name>contextClass</param-name>
+        <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
+    </context-param>
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>com.icesi.discografia.config.AppConfig</param-value>
+    </context-param>
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+    <servlet>
+        <servlet-name>artistList</servlet-name>
+        <servlet-class>com.icesi.discografia.servlet.ArtistListServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>artistList</servlet-name>
+        <url-pattern>/artists</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>artistCreate</servlet-name>
+        <servlet-class>com.icesi.discografia.servlet.ArtistCreateServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>artistCreate</servlet-name>
+        <url-pattern>/artists/create</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>artistSearch</servlet-name>
+        <servlet-class>com.icesi.discografia.servlet.ArtistSearchServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>artistSearch</servlet-name>
+        <url-pattern>/artists/search</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>artistDelete</servlet-name>
+        <servlet-class>com.icesi.discografia.servlet.ArtistDeleteServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>artistDelete</servlet-name>
+        <url-pattern>/artists/delete</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>trackList</servlet-name>
+        <servlet-class>com.icesi.discografia.servlet.TrackListServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>trackList</servlet-name>
+        <url-pattern>/tracks</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>trackCreate</servlet-name>
+        <servlet-class>com.icesi.discografia.servlet.TrackCreateServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>trackCreate</servlet-name>
+        <url-pattern>/tracks/create</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>trackDelete</servlet-name>
+        <servlet-class>com.icesi.discografia.servlet.TrackDeleteServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>trackDelete</servlet-name>
+        <url-pattern>/tracks/delete</url-pattern>
+    </servlet-mapping>
+
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+</web-app>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Repositorios: sin anotaciones, declarados explícitamente -->
+    <bean id="artistRepository"
+          class="com.icesi.discografia.repository.ArtistRepositoryImpl"/>
+
+    <bean id="trackRepository"
+          class="com.icesi.discografia.repository.TrackRepositoryImpl"/>
+
+    <!-- Servicios: dependencias inyectadas por constructor -->
+    <bean id="artistService"
+          class="com.icesi.discografia.service.ArtistServiceImpl">
+        <constructor-arg ref="artistRepository"/>
+    </bean>
+
+    <bean id="trackService"
+          class="com.icesi.discografia.service.TrackServiceImpl">
+        <constructor-arg ref="trackRepository"/>
+        <constructor-arg ref="artistRepository"/>
+    </bean>
+
+    <!-- Inicializador de datos: init-method en lugar de @PostConstruct -->
+    <bean id="dataInitializer"
+          class="com.icesi.discografia.init.DataInitializer"
+          init-method="init">
+        <constructor-arg ref="artistService"/>
+        <constructor-arg ref="trackService"/>
+    </bean>
+
+</beans>
