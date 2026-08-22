@@ -59,34 +59,6 @@ Al iniciar cualquiera de las tres apps ya estarán cargados **10 artistas y 50 t
 
 ---
 
-## Diferencia clave de DI entre versiones
-
-### Versión 1 — XML (`taller1-discografia-xml`)
-
-- **Archivo clave:** `src/main/webapp/WEB-INF/applicationContext.xml`
-- Beans declarados como `<bean id="..." class="..."/>` en XML.
-- Dependencias inyectadas con `<constructor-arg ref="..."/>`.
-- **Las clases de repositorio y servicio no tienen ninguna anotación Spring.**
-- `DataInitializer` se inicializa con `init-method="init"` en el XML.
-- `web.xml` carga el contexto vía `ContextLoaderListener` con `contextConfigLocation=/WEB-INF/applicationContext.xml`.
-
-### Versión 2 — Annotations (`taller1-discografia-annotations`)
-
-- **Archivo clave:** `src/main/java/com/icesi/discografia/config/AppConfig.java`
-- `@Configuration @ComponentScan("com.icesi.discografia")` detecta todos los beans automáticamente.
-- Las clases usan `@Repository`, `@Service`, `@Component` y `@Autowired` en el constructor.
-- `DataInitializer` usa `@PostConstruct` para la inicialización automática.
-- `web.xml` usa `AnnotationConfigWebApplicationContext` apuntando a `AppConfig`.
-
-### Versión 3 — JavaConfig (`taller1-discografia-javaconfig`)
-
-- **Archivo clave:** `src/main/java/com/icesi/discografia/config/AppConfig.java`
-- `@Configuration` sin `@ComponentScan`. Cada bean se declara explícitamente con un método `@Bean`.
-- **Las clases de negocio (repos, servicios, DataInitializer) no tienen anotaciones Spring.**
-- `DataInitializer` se inicializa con `@Bean(initMethod = "init")` en `AppConfig`.
-- `web.xml` usa `AnnotationConfigWebApplicationContext` apuntando a `AppConfig`.
-
----
 
 ## Flujos a probar (los 7 requeridos)
 
